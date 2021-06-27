@@ -1,19 +1,23 @@
-#!/bin/bash -x
+#!/bin/bash
 echo "Welcome to Filpcoin simulation"
-headcount=0
-tailcount=0
-max_won=21
+woncount=0
 
-while [ $headcount -lt $max_won -a $tailcount -lt $max_won ]
-
+while [ $woncount -le 2 -a $woncount -ge -2 ]
 do
-	random=$((RANDOM%2))
-	if [ $random -eq 1 ]
-	then
-		((headcount++))
-	else
-		((tailcount++))
-	fi
+	headcount=0
+	tailcount=0
+	max_won=21
+	while [ $headcount -lt $max_won -a $tailcount -lt $max_won ]
+	do
+		random=$((RANDOM%2))
+		if [ $random -eq 1 ]
+		then
+			((headcount++))
+		else
+			((tailcount++))
+		fi
+	done
+	woncount=$((headcount-tailcount))
 done
 
 if [ $headcount -eq $max_won ]
