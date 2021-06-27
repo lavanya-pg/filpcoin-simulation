@@ -1,11 +1,12 @@
 #!/bin/bash -x
 echo "Welcome to Filpcoin simulation"
-read -p "how much times you want to toss the coin: " num
 headcount=0
 tailcount=0
-for((i=1;i<=$num;i++))
-do
+max_won=21
 
+while [ $headcount -lt $max_won -a $tailcount -lt $max_won ]
+
+do
 	random=$((RANDOM%2))
 	if [ $random -eq 1 ]
 	then
@@ -15,5 +16,14 @@ do
 	fi
 done
 
-echo "head won $headcount times"
-echo "tail won $tailcount times"
+if [ $headcount -eq $max_won ]
+then
+	woncount=$((headcount-tailcount))
+	echo "head won."
+	echo "head won by $woncount points."
+else
+	woncount=$((tailcount-headcount))
+	echo "tail won."
+	echo "tail won by $woncount points."
+fi
+
